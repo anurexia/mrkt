@@ -5,19 +5,20 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuGroup,
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import Link from "next/link";
+import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
 
-interface iAppProps {
+interface UserNavProps {
   name: string;
   email: string;
   image: string | undefined;
 }
 
-const UserNav = ({ email, image, name }: iAppProps) => {
+const UserNav = ({ email, image, name }: UserNavProps) => {
   return (
     <div>
       <DropdownMenu>
@@ -47,12 +48,8 @@ const UserNav = ({ email, image, name }: iAppProps) => {
           <DropdownMenuSeparator className="my-2" />
 
           <DropdownMenuGroup>
-            <DropdownMenuItem className="cursor-pointer">
-              Profile
-            </DropdownMenuItem>
-
-            <DropdownMenuItem className="cursor-pointer">
-              Settings
+            <DropdownMenuItem asChild>
+              <Link href="/sell">Sell your Item</Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
 
