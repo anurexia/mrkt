@@ -39,7 +39,7 @@ export const categories: categoriesProps[] = [
     description:
       "A collection of modern, responsive templates for websites and web apps.",
     image: <Blocks />, // Lucide icon for templates
-    name: "Templates",
+    name: "templates",
     title: "Website Templates",
   },
   {
@@ -47,7 +47,7 @@ export const categories: categoriesProps[] = [
     description:
       "Comprehensive UI kits for building cohesive and visually appealing applications.",
     image: <Hammer />, // Lucide icon for UI kits
-    name: "UIKits",
+    name: "uiKits",
     title: "Design System Kits",
   },
   {
@@ -55,7 +55,7 @@ export const categories: categoriesProps[] = [
     description:
       "A rich set of customizable icons for use in various design and development projects.",
     image: <PartyPopper />, // Lucide icon for icons
-    name: "Icons",
+    name: "icons",
     title: "Icon Library",
   },
 ];
