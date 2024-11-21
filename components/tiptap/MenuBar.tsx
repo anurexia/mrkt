@@ -1,10 +1,21 @@
 "use client";
 
-import { useEditor, EditorContent, type Editor } from "@tiptap/react";
+import {
+  useEditor,
+  EditorContent,
+  type Editor,
+  JSONContent,
+} from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Button } from "../ui/button";
 
-const MenuBar = () => {
+const MenuBar = ({
+  json,
+  setJson,
+}: {
+  json: JSONContent | null;
+  setJson: any;
+}) => {
   const editor: Editor | null = useEditor({
     extensions: [
       StarterKit.configure({
@@ -13,12 +24,15 @@ const MenuBar = () => {
         },
       }),
     ],
-    content: "enter your text here",
+    content: json || "<p>Hello Everyone</p>",
     editorProps: {
       attributes: {
         // - modify the class for the typography plugin to take effect
         class: "focus:outline-none min-h-[150px] prose prose-sm sm:prose-base",
       },
+    },
+    onUpdate: ({ editor }) => {
+      setJson(editor.getJSON());
     },
   });
 

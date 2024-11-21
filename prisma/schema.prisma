@@ -22,7 +22,7 @@ model Product {
   id                String        @id @default(uuid())
   name              String
   price             Int
-  small_description String
+  short_description String
   description       Json
   images            String[]
   product_file      String

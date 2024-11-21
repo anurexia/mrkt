@@ -8,6 +8,7 @@ import { AuthProvider } from "./AuthProvider";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -46,7 +47,14 @@ export default function RootLayout({
             routerConfig={extractRouterConfig(ourFileRouter)}
           />
           <Navbar />
-          {children}
+          <main>{children}</main>
+          <Toaster
+            closeButton
+            duration={3000}
+            position="top-right"
+            richColors
+            theme="light"
+          />
         </body>
       </html>
     </AuthProvider>

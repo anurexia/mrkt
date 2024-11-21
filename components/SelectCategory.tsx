@@ -10,21 +10,23 @@ const SelectCategory = () => {
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+      <input type="hidden" name="category" value={selectedCategory || ""} />
       {categories.map((category) => (
         <div
           key={category.id}
           className="cursor-pointer"
-          onClick={() => setSelectedCategory(category.title)}
+          onClick={() => setSelectedCategory(category.name)}
         >
           <Card
             className={cn(
-              selectedCategory === category.title &&
+              selectedCategory === category.name &&
                 "border-primary transition-all duration-300",
               "border-2",
             )}
           >
             <CardHeader>
-              {category.image} <h3 className="font-medium">{category.name}</h3>
+              {category.image}{" "}
+              <h3 className="font-medium capitalize">{category.name}</h3>
             </CardHeader>
           </Card>
         </div>
