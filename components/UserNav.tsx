@@ -6,11 +6,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   DropdownMenuLabel,
+  DropdownMenuShortcut,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import Link from "next/link";
 import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
+import { Settings } from "lucide-react";
 
 interface UserNavProps {
   name: string;
@@ -49,7 +51,16 @@ const UserNav = ({ email, image, name }: UserNavProps) => {
 
           <DropdownMenuGroup>
             <DropdownMenuItem asChild>
-              <Link href="/sell">Sell your Item</Link>
+              <Link href="/sell">Sell your Product</Link>
+            </DropdownMenuItem>
+
+            <DropdownMenuItem asChild>
+              <Link href="/settings">
+                Settings{" "}
+                <DropdownMenuShortcut>
+                  <Settings />
+                </DropdownMenuShortcut>
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
 

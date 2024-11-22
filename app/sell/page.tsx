@@ -14,9 +14,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+
 // - useFormState was renamed to useActionState
 import { ReactNode, useActionState, useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { UploadDropzone } from "../lib/uploadthing";
 import { JSONContent } from "@tiptap/react";
 import { sellProduct, State } from "../actions";
@@ -189,7 +189,7 @@ const SellRoute = () => {
           </CardContent>
 
           <CardFooter className="mt-5">
-            <SubmitButton />
+            <SubmitButton title="Create Product" />
           </CardFooter>
         </form>
       </Card>

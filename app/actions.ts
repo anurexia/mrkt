@@ -91,3 +91,60 @@ export const sellProduct = async (prevState: any, formData: FormData) => {
 
   return state;
 };
+
+// - for user settings
+const userSettingsSchema = z.object({
+  // - make it optional
+  firstName: z
+    .string()
+    .min(3, { message: "Must have a minimum of 3 characters" })
+    .or(z.literal(""))
+    .optional(),
+
+  lastName: z
+    .string()
+    .min(3, { message: "Must have a minimum of 3 characters" })
+    .or(z.literal(""))
+    .optional(),
+});
+
+export const updateUserSettings = async (
+  prevState: any,
+  formData: FormData,
+) => {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) throw new Error("Something wen't wrong!");
+
+  const validatedFields = userSettingsSchema.safeParse({
+    firstName: formData.get("firstName"),
+    lastName: formData.get("lastName"),
+  });
+
+  if (!validatedFields.success) {
+    const state: State = {
+      status: "error",
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "There seems to be a problem with your inputs...",
+    };
+
+    return state;
+  }
+
+  // - update the user if it's successful
+  const data = await prisma.user.update({
+    where: { id: user.id },
+    data: {
+      first_name: validatedFields.data.firstName as string,
+      last_name: validatedFields.data.lastName as string,
+    },
+  });
+
+  const state: State = {
+    status: "success",
+    message: "Settings has been updated",
+  };
+
+  return state;
+};
