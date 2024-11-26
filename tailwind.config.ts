@@ -8,6 +8,9 @@ export default withUt({
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  corePlugins: {
+    aspectRatio: false,
+  },
   theme: {
     extend: {
       borderRadius: {
@@ -60,5 +63,9 @@ export default withUt({
     },
   },
   //   - add this for typography plugin https://github.com/tailwindlabs/tailwindcss-typography
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/aspect-ratio"),
+  ],
 }) satisfies Config;
