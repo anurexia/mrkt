@@ -19,6 +19,7 @@ const getData = async (category: string) => {
       break;
     }
     case "all": {
+      // if input is undefined, then it would just skill the where clause, and will fetch every products
       input = undefined;
       break;
     }

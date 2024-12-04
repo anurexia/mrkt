@@ -11,6 +11,7 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 import Link from "next/link";
+import { Skeleton } from "./ui/skeleton";
 
 interface ProductCardProps {
   id: string;
@@ -80,3 +81,17 @@ const ProductCard = ({
   );
 };
 export default ProductCard;
+
+// - you can either create the loading state in the component, or separate file
+export const ProductCardLoading = () => {
+  return (
+    <div className="flex w-96 flex-col">
+      <Skeleton className="h-[230px] w-full" />
+      <div className="mt-2 flex flex-col gap-y-2">
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-6 w-full" />
+      </div>
+      <Skeleton className="mt-5 h-10 w-full" />
+    </div>
+  );
+};

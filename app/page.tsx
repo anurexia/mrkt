@@ -1,4 +1,4 @@
-import NewestProducts from "@/components/NewestProducts";
+import ProductRow from "@/components/ProductRow";
 
 export default function Home() {
   return (
@@ -17,7 +17,11 @@ export default function Home() {
         </p>
       </div>
 
-      <NewestProducts />
+      {/* <NewestProducts /> */}
+      <ProductRow category="newest" />
+      <ProductRow category="icons" />
+      <ProductRow category="templates" />
+      <ProductRow category="uikits" />
     </section>
   );
 }
