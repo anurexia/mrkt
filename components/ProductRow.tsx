@@ -158,6 +158,7 @@ export const LoadingState = () => {
         <ProductCardLoading />
         <ProductCardLoading />
         <ProductCardLoading />
+        <ProductCardLoading />
       </div>
     </div>
   );
