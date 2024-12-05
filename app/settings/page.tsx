@@ -1,7 +1,7 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "../lib/db";
 import { Card } from "@/components/ui/card";
-import SettingsForm from "@/components/SettingsForm";
+import SettingsForm from "@/components/form/SettingsForm";
 
 import { unstable_noStore as noStore } from "next/cache";
 

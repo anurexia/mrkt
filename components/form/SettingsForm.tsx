@@ -1,17 +1,17 @@
 "use client";
 
 import { ReactNode, useActionState, useEffect } from "react";
-import SubmitButton from "./SubmitButton";
+import SubmitButton from "../SubmitButton";
 import {
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { State, updateUserSettings } from "@/app/actions";
+} from "../ui/card";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { type State, updateUserSettings } from "@/app/actions";
 import { toast } from "sonner";
 
 interface SettingsFormProps {

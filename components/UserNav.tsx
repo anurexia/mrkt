@@ -62,6 +62,15 @@ const UserNav = ({ email, image, name }: UserNavProps) => {
                 </DropdownMenuShortcut>
               </Link>
             </DropdownMenuItem>
+
+            <DropdownMenuItem asChild>
+              <Link href="/my-products">
+                Browse your Products{" "}
+                <DropdownMenuShortcut>
+                  <Settings />
+                </DropdownMenuShortcut>
+              </Link>
+            </DropdownMenuItem>
           </DropdownMenuGroup>
 
           <DropdownMenuSeparator />
