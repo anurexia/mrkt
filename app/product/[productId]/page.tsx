@@ -11,6 +11,8 @@ import {
 import Image from "next/image";
 
 import { JSONContent } from "@tiptap/react";
+import { BuyProduct } from "@/app/actions";
+import { BuyButton } from "@/components/SubmitButton";
 
 const getData = async (productId: string) => {
   const data = await prisma.product.findUnique({
@@ -18,6 +20,7 @@ const getData = async (productId: string) => {
       id: productId,
     },
     select: {
+      id: true,
       category: true,
       description: true,
       short_description: true,
@@ -47,7 +50,7 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
           {product?.images.map((image) => (
             <CarouselItem key={image}>
               {/* this aspect is a tailwind plugin, so you need to  install it */}
-              <div className="aspect-w-3 aspect-h-3 overflow-hidden rounded-lg bg-gray-100">
+              <div className="aspect-h-3 aspect-w-3 overflow-hidden rounded-lg bg-gray-100">
                 <Image
                   src={image}
                   fill
@@ -71,9 +74,10 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
           {product?.short_description}
         </p>
 
-        <Button size="lg" className="mt-10 w-full">
-          Buy for ${product?.price}
-        </Button>
+        <form action={BuyProduct}>
+          <input type="hidden" name="id" value={product?.id} />
+          <BuyButton price={product?.price as number} />
+        </form>
 
         {/* Product details  */}
         <div className="mt-6 pt-6">

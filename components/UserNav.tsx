@@ -12,7 +12,7 @@ import { Button } from "./ui/button";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import Link from "next/link";
 import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
-import { Package, Settings } from "lucide-react";
+import { HandCoins, Package, Settings } from "lucide-react";
 
 interface UserNavProps {
   name: string;
@@ -68,6 +68,15 @@ const UserNav = ({ email, image, name }: UserNavProps) => {
                 Browse your Products{" "}
                 <DropdownMenuShortcut>
                   <Package />
+                </DropdownMenuShortcut>
+              </Link>
+            </DropdownMenuItem>
+
+            <DropdownMenuItem asChild>
+              <Link href="/billing">
+                Billing
+                <DropdownMenuShortcut>
+                  <HandCoins />
                 </DropdownMenuShortcut>
               </Link>
             </DropdownMenuItem>

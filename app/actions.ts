@@ -4,6 +4,8 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { z } from "zod";
 import prisma from "./lib/db";
 import { type CategoryTypes } from "@prisma/client";
+import { stripe } from "@/lib/stripe";
+import { redirect } from "next/navigation";
 
 // create a state for errors
 export type State = {
@@ -147,4 +149,73 @@ export const updateUserSettings = async (
   };
 
   return state;
+};
+
+export const BuyProduct = async (formData: FormData) => {
+  const id = formData.get("id") as string;
+
+  // get the product first since we also want users that isn't logged in to be able to check out products
+  const data = await prisma.product.findUnique({
+    where: {
+      id,
+    },
+    select: {
+      name: true,
+      price: true,
+      short_description: true,
+      images: true,
+    },
+  });
+
+  // create the checkout session
+  const session = await stripe.checkout.sessions.create({
+    mode: "payment",
+    line_items: [
+      {
+        price_data: {
+          currency: "usd",
+          unit_amount: Math.round((data?.price as number) * 100),
+          product_data: {
+            name: data?.name as string,
+            description: data?.short_description,
+            images: data?.images,
+          },
+        },
+        quantity: 1,
+      },
+    ],
+    success_url: "http://localhost:3000/payment/success",
+    cancel_url: "http://localhost:3000/payment/cancel",
+  });
+
+  // session.url is the url where it uses the checkout provided by stripe
+  return redirect(session.url as string);
+};
+
+export const CreateStripeAccountLink = async () => {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) {
+    throw new Error("Something wen't wrong!");
+  }
+
+  const data = await prisma.user.findUnique({
+    where: {
+      id: user.id,
+    },
+    select: {
+      connectedAccountId: true,
+    },
+  });
+
+  const accountLink = await stripe.accountLinks.create({
+    account: data?.connectedAccountId as string,
+    // - where user gets redirected to connect them again to the onboarding
+    refresh_url: "http://localhost:3000/billing",
+    return_url: `http://localhost:3000/return/${data?.connectedAccountId}`,
+    type: "account_onboarding",
+  });
+
+  return redirect(accountLink.url);
 };

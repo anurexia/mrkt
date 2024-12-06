@@ -31,6 +31,7 @@ const MenuBar = ({
         class: "focus:outline-none min-h-[150px] prose prose-sm sm:prose-base",
       },
     },
+    immediatelyRender: false,
     onUpdate: ({ editor }) => {
       setJson(editor.getJSON());
     },
